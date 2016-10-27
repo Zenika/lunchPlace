@@ -1,10 +1,10 @@
 version: '2'
 services:
-  front:
+  frontend-web:
     build: ./frontend-web/
     ports:
       - "8090:80"
-  back:
+  backend:
     build: ./backend/
     ports:
       - "8080:8080"

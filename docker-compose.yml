@@ -1,4 +1,4 @@
- psversion: '2'
+version: '2'
 services:
   front:
     build: ./frontend_web/

@@ -1,7 +1,7 @@
 version: '2'
 services:
   front:
-    build: ./frontend_web/
+    build: ./frontend-web/
     ports:
       - "8090:80"
   back:

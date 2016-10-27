@@ -1,0 +1,17 @@
+.idea/
+.idea_modules/
+*.iml
+out
+gen
+
+.gradle
+backend/gradle/
+backend/gradle-app.setting
+!backend/gradle/gradle-wrapper.jar
+backend/.gradletasknamecache
+backend/build/
+backend/*.iml
+
+frontent_web/*.iml
+
+

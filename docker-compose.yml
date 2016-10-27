@@ -1,0 +1,10 @@
+ psversion: '2'
+services:
+  front:
+    build: ./frontend_web/
+    ports:
+      - "8090:80"
+  back:
+    build: ./backend/
+    ports:
+      - "8080:8080"

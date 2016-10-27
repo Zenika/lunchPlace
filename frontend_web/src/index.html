@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="simpleApp">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <title>Simple FO</title>
+</head>
+<body data-ng-controller="NameController" data-ng-init="getContactList()">
+
+<section>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="jumbotron content">
+                <h1 class="free">Ajoute mon nom !</h1>
+
+                <div class="well">
+                    <div class="input-group">
+                        <input class="btn btn-lg" name="nom" id="nom" type="text" placeholder="Ton nom" required
+                               data-ng-model="newname">
+                        <button class="btn btn-info btn-lg" data-ng-click="addContact()">Demander</button>
+                    </div>
+                </div>
+
+                <small class="promise"><em>Avec un peu de chance ça marchera :)</em></small>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="[ col-xs-12 col-sm-offset-2 col-sm-8 ]">
+            <ul class="event-list">
+
+                <li data-ng-repeat="contact in contacts track by $index">
+                    <time datetime="2014-07-20 0000">
+                        <span class="numero">{{contact.id}}</span>
+                    </time>
+                    <div class="info">
+                        <h2 class="title">{{contact.name}}</h2>
+                        <p class="desc">{{contact.detail}}</p>
+                        <ul>
+                            <li style="width:50%;"><span class="fa fa-thumbs-up"></span> 0</li>
+                            <li style="width:50%;"><span class="fa fa-thumbs-down"></span> 0</li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</section>
+
+<script src="js/angular.min.js"></script>
+<script src="js/app.js"></script>
+
+
+</body>
+</html>

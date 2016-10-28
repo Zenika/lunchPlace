@@ -1,30 +1,31 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello> 
-    <ul>
-      <li v-for="item in items">bouh <restaurant v-bind:item="item"></restaurant></li>
-    </ul>
+    <day-restaurant v-bind:item="selected"></day-restaurant> 
+    <restaurants v-bind:items="items"></restaurants> 
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello';
 import Restaurant from './components/Restaurant';
+import Restaurants from './components/Restaurants';
+import DayRestaurant from './components/DayRestaurant';
 
 export default {
   name: 'app',
   components: {
-    Hello, Restaurant,
+    Hello, Restaurants, DayRestaurant
+  },
+  created: function(){
+    fetch('http://localhost:8080/static/day-restaurant.json').then(response => response.json()).then(data => this.selected = data);
+    fetch('http://localhost:8080/static/restaurants.json').then(response => response.json()).then(data => this.items = data);
   },
   data() {
     return {
-      items: [
-        { id: 1, name: 'L\'adresse', address: 'Lille' },
-        { id: 1, name: 'L\'adresse', address: 'Lille' },
-      ],
-    };
-  },
+      items: [],
+      selected: {}
+    };  
+  }
 };
 </script>
 

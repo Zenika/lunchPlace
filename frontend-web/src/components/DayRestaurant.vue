@@ -1,5 +1,5 @@
 <template>
-  <div class="restaurant">
+  <div id="today">
     <img v-bind:src="item.cover" alt="" />
     <div class="info">
       <span class="name">{{item.name}}</span>
@@ -17,36 +17,33 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  $mint: #41B883;
-  $cello : #35495E;
+#today{
 
-  .restaurant{
+  background: #41B883;
+  display: flex;
+  width: 100%;
+  margin: 50px auto;
 
-    background: #41B883;
-    display: flex;
-    height: 150px;
+  img{
 
-    img{
-      height: 100%;
-      width: auto;
+  }
+  .info{
+
+    padding: 10px;
+
+    > *{
+      display: block;
     }
-    .info{
+    .name{
+      font-size: 30px;
+      text-align: center;
+    }
+    .address{
 
-      padding: 10px;
+    }
+    .tel{
 
-      > *{
-        display: block;
-      }
-      .name{
-        font-size: 30px;
-        text-align: center;
-      }
-      .address{
-
-      }
-      .tel{
-
-      }
     }
   }
+}
 </style>

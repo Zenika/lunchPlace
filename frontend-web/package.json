@@ -13,6 +13,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "vue": "^2.0.1"
   },
   "devDependencies": {

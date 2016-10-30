@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="item in items">
-      <lp-restaurant v-bind:item="item"></lp-restaurant>
+      <lp-restaurant :item="item"></lp-restaurant>
     </li>
   </ul>
 </template>
@@ -11,7 +11,7 @@ import Restaurant from './Restaurant';
 
 export default {
   components: {
-    'lp-restaurant':Restaurant
+    'lp-restaurant': Restaurant
   },
   props: ['items'],
 };

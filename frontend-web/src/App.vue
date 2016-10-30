@@ -2,8 +2,8 @@
   <div id="app">
     <lp-header></lp-header>
     <div class="content">
-      <lp-day-restaurant v-bind:item="selected"></lp-day-restaurant>
-      <lp-restaurants v-bind:items="items"></lp-restaurants>
+      <lp-day-restaurant :item="selected"></lp-day-restaurant>
+      <lp-restaurants :items="items"></lp-restaurants>
     </div>
   </div>
 </template>
@@ -16,13 +16,17 @@ import DayRestaurant from './components/DayRestaurant';
 export default {
   name: 'app',
   components: {
-    'lp-restaurants' : Restaurants,
-    'lp-day-restaurant' : DayRestaurant,
-    'lp-header' : Header
+    'lp-restaurants': Restaurants,
+    'lp-day-restaurant': DayRestaurant,
+    'lp-header': Header
   },
-  created: function(){
-    fetch('http://localhost:8080/static/day-restaurant.json').then(response => response.json()).then(data => this.selected = data);
-    fetch('http://localhost:8080/static/restaurants.json').then(response => response.json()).then(data => this.items = data);
+  created() {
+    fetch('http://localhost:8080/static/day-restaurant.json').then(response => response.json()).then((data) => {
+      this.selected = data;
+    });
+    fetch('http://localhost:8080/static/restaurants.json').then(response => response.json()).then((data) => {
+      this.items = data;
+    });
   },
   data() {
     return {

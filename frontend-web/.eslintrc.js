@@ -9,6 +9,9 @@ module.exports = {
   plugins: [
     'html'
   ],
+  'env': {
+    'browser': true
+  },
   // check if imports actually resolve
   'settings': {
     'import/resolver': {
@@ -16,6 +19,11 @@ module.exports = {
         'config': 'build/webpack.base.conf.js'
       }
     }
+  },
+  "globals": {
+    "fetch": true,
+    "expect": true,
+    "sinon": true
   },
   // add your custom rules here
   'rules': {
@@ -25,6 +33,7 @@ module.exports = {
       'vue': 'never'
     }],
     // allow debugger during development
+    'comma-dangle': 0,
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 }

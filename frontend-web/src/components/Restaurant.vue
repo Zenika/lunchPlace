@@ -1,6 +1,6 @@
 <template>
   <div class="restaurant">
-    <img v-bind:src="item.cover" alt="" />
+    <img :src="item.cover" alt="" />
     <div class="info">
       <span class="name">{{item.name}}</span>
       <span class="address">{{item.address}}</span>

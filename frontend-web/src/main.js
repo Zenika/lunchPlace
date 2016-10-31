@@ -10,6 +10,5 @@ new Vue({
   router : Router,
   components: { App },
   created: function(){
-
   },
 });

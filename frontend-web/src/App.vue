@@ -1,19 +1,13 @@
 <template>
   <div id="app">
-    <lp-header></lp-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-import Header from './components/Header';
-
 export default {
-  name: 'app',
-  components: {
-    'lp-header' : Header
-  }
+  name: 'app'
 };
 </script>
 

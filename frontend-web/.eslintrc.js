@@ -23,7 +23,8 @@ module.exports = {
   "globals": {
     "fetch": true,
     "expect": true,
-    "sinon": true
+    "sinon": true,
+    "Vue": true
   },
   // add your custom rules here
   'rules': {

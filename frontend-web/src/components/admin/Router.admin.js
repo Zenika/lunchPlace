@@ -2,8 +2,8 @@ const ADMIN_ROUTES = [{
     path: '/admin',
     component: require('./Admin'),
     children: [
-        { path: '', component: require('./RestaurantsList') },
-        { path: 'edit', component: require('./RestaurantForm') },
+        { name: 'admin.list',  path: '', component: require('./RestaurantsList') },
+        { name: 'admin.edit', path: 'edit', component: require('./RestaurantForm') },
         { path: '*', component: require('./RestaurantsList') }
     ]
 }];

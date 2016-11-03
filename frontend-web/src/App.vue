@@ -11,10 +11,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   html,body{
     margin: 0;
     padding: 0;
+    height: 100%;
   }
 
   a {
@@ -38,12 +39,7 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-  }
-
-  .content{
-    max-width: 1200px;
-    width: 80%;
-    margin: auto;
+    height: 100%
   }
 
   ul{

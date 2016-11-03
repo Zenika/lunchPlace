@@ -1,6 +1,6 @@
 [
-    { "id": 1, "name": "L'adresse", "address": "34 B rue des Bouchers, 59800, Lille, France","tel":"0359896633","cover":"https://media-cdn.tripadvisor.com/media/photo-s/06/77/c1/5a/le-parisien-et-sa-tranche.jpg" },
-    { "id": 2, "name": "Le Tokyo", "address": "55 rue Nationale, 59800, Lille, France", "tel": "0320129888", "cover": "https://s3-media4.fl.yelpcdn.com/bphoto/OKX7Cc0AaZE8Stsk30dEXg/o.jpg" },
-    { "id": 3, "name": "Sogood", "address": "55 rue Nationale, 59800, Lille, France", "tel": "0320129888", "cover": "http://4.bp.blogspot.com/-JVgWCxKiyWI/U3YA6Jy7rwI/AAAAAAAACOs/Ri4KElYkSwU/s1600/choix.jpg" },
-    { "id": 4, "name": "Honey and Pie", "address": "55 rue Nationale, 59800, Lille, France", "tel": "0320129888", "cover": "http://www.honeyandpie.com/img/photos/zoom/accueil-01.jpg" }
+    { "id": 1, "name": "L'adresse", "address": "34 B rue des Bouchers, Lille","tel":"0359896633","cover":"https://media-cdn.tripadvisor.com/media/photo-s/06/77/c1/5a/le-parisien-et-sa-tranche.jpg" },
+    { "id": 2, "name": "Le Tokyo", "address": "55 rue Nationale, Lille", "tel": "0320129888", "cover": "https://s3-media4.fl.yelpcdn.com/bphoto/OKX7Cc0AaZE8Stsk30dEXg/o.jpg" },
+    { "id": 3, "name": "Sogood", "address": "55 rue Nationale, Lille", "tel": "0320129888", "cover": "http://4.bp.blogspot.com/-JVgWCxKiyWI/U3YA6Jy7rwI/AAAAAAAACOs/Ri4KElYkSwU/s1600/choix.jpg" },
+    { "id": 4, "name": "Honey and Pie", "address": "55 rue Nationale, Lille", "tel": "0320129888", "cover": "http://www.honeyandpie.com/img/photos/zoom/accueil-01.jpg" }
 ]

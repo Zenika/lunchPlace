@@ -17,7 +17,8 @@ export default {
     'lp-restaurant': Restaurant
   },
   created: function(){
-    fetch('http://localhost:8080/static/restaurants.json').then(response => response.json()).then(data => this.items = data);
+    console.log(process.env.API_URL)
+    fetch(`${process.env.API_URL}restaurants.json`).then(response => response.json()).then(data => this.items = data);
   },
   data() {
     return {
@@ -27,7 +28,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 
   h2{

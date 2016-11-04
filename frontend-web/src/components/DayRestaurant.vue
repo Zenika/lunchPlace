@@ -17,7 +17,7 @@
 <script>
 export default {
   created: function(){
-    fetch('http://localhost:8080/static/day-restaurant.json').then(response => response.json()).then(data => this.item = data);
+    fetch(`${process.env.API_URL}day-restaurant.json`).then(response => response.json()).then(data => this.item = data);
   },
   data() {
     return {
@@ -27,7 +27,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .today{
 

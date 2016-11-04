@@ -10,12 +10,12 @@ import java.util.*
  */
 
 @RestController
-@RequestMapping("/organizations")
-class OrganizationController @Autowired constructor(val repository: OrganizationRepository) {
+@RequestMapping("/teams")
+class TeamController @Autowired constructor(val repository: TeamRepository) {
 
     @CrossOrigin
     @RequestMapping("/", method = arrayOf(RequestMethod.GET))
-    fun findAll(): Iterable<Organization> = repository.findAll()
+    fun findAll(): Iterable<Team> = repository.findAll()
 
     @RequestMapping("/{name}")
     fun findByName(@PathVariable name: String)
@@ -23,13 +23,14 @@ class OrganizationController @Autowired constructor(val repository: Organization
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
-    fun add(@RequestParam(value = "name", defaultValue = "Zenika") name: String): Organization {
+    fun add(@RequestParam(value = "name", defaultValue = "Les Biloutes") name: String): Team {
 
-        val organization = Organization(name, ArrayList<Team>(), ArrayList<Restaurant>())
+        //by default a team has never eaten to any restaurant
+        val team = Team(name, ArrayList<User>(), ArrayList<Restaurant>(), ArrayList<Restaurant>())
 
-        repository.save(organization)
+        repository.save(team)
 
-        return organization
+        return team
     }
 
 }

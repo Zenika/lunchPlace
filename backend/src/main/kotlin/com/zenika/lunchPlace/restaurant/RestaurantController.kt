@@ -42,7 +42,7 @@ class RestaurantController @Autowired constructor(val repository: RestaurantRepo
                         "FR"
                 ),*/
                 ArrayList<FoodCategory>(),
-                PriceCategory.STANDARD)
+                PriceCategory.LP_PRICE_STANDARD)
 
         repository.save(restaurant)
 

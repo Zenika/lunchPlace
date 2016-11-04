@@ -1,5 +1,6 @@
 package com.zenika.lunchPlace.restaurant.address
 
+import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -17,4 +18,4 @@ data class Address(val latitude: Double?,
                    val country: String = "France",
                    val countryCode: String = "FR",
                    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-                   val id: Long = 0)
+                   val id: Long = 0) : Serializable

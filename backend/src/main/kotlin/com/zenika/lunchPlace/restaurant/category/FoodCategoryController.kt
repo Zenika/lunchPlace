@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
  */
 
 @RestController
-@RequestMapping("/foodCategory")
+@RequestMapping("/foodCategories")
 class FoodCategoryController @Autowired constructor(val repository: FoodCategoryRepository) {
 
     @CrossOrigin
@@ -16,7 +16,7 @@ class FoodCategoryController @Autowired constructor(val repository: FoodCategory
     fun findAll(): Iterable<FoodCategory> = repository.findAll()
 
     @RequestMapping("/{name}")
-    fun findByLastName(@PathVariable name: String)
+    fun findByName(@PathVariable name: String)
             = repository.findByName(name)
 
     @CrossOrigin

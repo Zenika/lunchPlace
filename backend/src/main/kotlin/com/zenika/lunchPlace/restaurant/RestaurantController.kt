@@ -1,7 +1,6 @@
 package com.zenika.lunchPlace.restaurant
 
 import com.zenika.lunchPlace.organization.RestaurantRepository
-import com.zenika.lunchPlace.restaurant.address.Address
 import com.zenika.lunchPlace.restaurant.category.FoodCategory
 import com.zenika.lunchPlace.restaurant.category.PriceCategory
 import org.springframework.beans.factory.annotation.Autowired
@@ -42,7 +41,8 @@ class RestaurantController @Autowired constructor(val repository: RestaurantRepo
                         "FR"
                 ),*/
                 ArrayList<FoodCategory>(),
-                PriceCategory.LP_PRICE_STANDARD)
+                PriceCategory.LP_PRICE_STANDARD,
+                "")
 
         repository.save(restaurant)
 

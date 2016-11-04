@@ -1,9 +1,7 @@
 package com.zenika.lunchPlace.organization
 
-import com.zenika.lunchPlace.restaurant.Restaurant
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 /**
  * Created by Gwennaël Buchet on 02/11/16.

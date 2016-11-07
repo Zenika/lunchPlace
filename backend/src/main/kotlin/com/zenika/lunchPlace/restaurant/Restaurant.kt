@@ -14,5 +14,5 @@ data class Restaurant(val name: String = "",
                       val foodCategories: ArrayList<FoodCategory> = ArrayList<FoodCategory>(),
                       val priceCategory: PriceCategory = PriceCategory.LP_PRICE_STANDARD,
                       val imageURL: String = "",
-                      @Id @GeneratedValue(strategy = GenerationType.AUTO)
+                      @Id @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
                       val id: Long = 0) : Serializable

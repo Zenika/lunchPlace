@@ -26,7 +26,8 @@ open class LunchPlaceApplication {
                   foodCategoryRepository: FoodCategoryRepository,
                   teamRepository: TeamRepository,
                   userRepository: UserRepository,
-                  preferredRestaurantRepository: PreferredRestaurantRepository
+                  preferredRestaurantRepository: PreferredRestaurantRepository,
+                  organizationRepository: OrganizationRepository
     ): CommandLineRunner {
         return CommandLineRunner {
 
@@ -125,11 +126,15 @@ open class LunchPlaceApplication {
 
 
             val teamBiloute = Team("Les Biloutes",
-                    arrayListOf(userGwen, userAurelien, userManuD, userChristophe),
-                    arrayListOf(preferedRestaurant1, preferedRestaurant2, preferedRestaurant3, preferedRestaurant4, preferedRestaurant5),
+                    mutableListOf(userGwen, userAurelien, userManuD, userChristophe),
+                    mutableListOf(preferedRestaurant1, preferedRestaurant2, preferedRestaurant3, preferedRestaurant4, preferedRestaurant5),
                     ArrayList<UsedRestaurant>())
 
             teamRepository.save(teamBiloute)
+
+            val organizationZenika = Organization("Zenika", mutableListOf(teamBiloute))
+            organizationRepository.save(organizationZenika)
+
         }
     }
 }

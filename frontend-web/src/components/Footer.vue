@@ -1,0 +1,21 @@
+<template>
+  <footer>
+    <router-link to="/" id="logo">
+    </router-link>
+  </footer>
+</template>
+
+<script>
+export default {
+
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+
+  footer{
+    
+  }
+
+</style>

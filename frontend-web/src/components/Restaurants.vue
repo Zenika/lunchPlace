@@ -43,8 +43,8 @@ export default {
 
     li{
       min-width: 20%;
-      width: 350px;
-      max-width: 80%;
+      width: 300px;
+      max-width: 100%;
       margin-bottom: 50px;
     }
   }

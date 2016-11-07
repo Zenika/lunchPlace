@@ -44,7 +44,7 @@ export default {
     box-shadow: 1px 1px 10px -2px #000000;
     overflow: hidden;
     width: 100%;
-    margin: 80px auto;
+    margin: 40px auto;
     display: flex;
 
     .cover{

@@ -1,1 +1,7 @@
-{ "id": 1, "name": "L'adresse", "address": "34 B rue des Bouchers, 59800, Lille, France","tel":"0359896633","cover":"https://media-cdn.tripadvisor.com/media/photo-s/06/77/c1/5a/le-parisien-et-sa-tranche.jpg" }
+{
+  "id": 1,
+  "name": "L'adresse",
+  "address": "34 B rue des Bouchers, 59800, Lille, France",
+  "tel":"0359896633",
+  "cover":"http://www.holyburger.fr/wp-content/uploads/2014/04/ladresse_head.jpg" 
+}

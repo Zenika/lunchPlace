@@ -1,14 +1,16 @@
 <template>
   <header>
-    <a id="logo" href="/">
+    <router-link to="/" id="logo">
       <img src="/static/logo.png">
       <span>Lunch Place</span>
-    </a>
+    </router-link>
     <ul id="nav">
-      <li><router-link to="/vote">Je vote</router-link></li>
+      <li class="hidden"><router-link to="/vote">Je vote</router-link></li>
+      <li><router-link to="/today">Le Restaurant</router-link></li>
       <li><router-link to="/restaurants">Les Restaurants</router-link></li>
-      <li><router-link to="/admin/" class="nav-link">Admin</router-link></li>
-      <li><router-link to="/contact">Contact</router-link></li>
+      <li class="hidden"><router-link to="/" class="nav-link">Créer une team</router-link></li>
+      <li class="hidden"><router-link to="/" class="nav-link">Chercher votre team</router-link></li>
+      <li class="hidden"><router-link class="signin" to="/signin">Se connecter</router-link></li>
     </ul>
   </header>
 </template>
@@ -31,7 +33,7 @@ export default {
 
     #logo {
       display: inline-block;
-      font-size: 1.5em;
+      font-size: 2em;
       line-height: 40px;
       color: white;
       font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
@@ -60,6 +62,19 @@ export default {
         margin-left: 30px;
         a{
           color:white;
+          font-size: 1em;
+          font-weight: 900;
+          border-radius: 5px;
+          padding: 5px 8px;
+          transition: all 0.3s;
+        }
+        a.signin{
+          border: solid 2px white;
+          border-radius: 5px;
+          padding: 5px 8px;
+        }
+        a:hover{
+          background: rgba(173, 173, 173, 0.4)
         }
       }
 

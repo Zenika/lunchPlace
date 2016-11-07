@@ -1,18 +1,21 @@
 <template>
   <div class="front-page">
-    <lp-header></lp-header>
+    <lp-header class="lite"></lp-header>
     <router-view></router-view>
+    <lp-footer class="lite"></lp-footer>
   </div>
 </template>
 
 <script>
 
 import Header from './Header';
+import Footer from './Footer';
 import 'font-awesome/css/font-awesome.css';
 
 export default {
   components: {
-    'lp-header' : Header
+    'lp-header' : Header,
+    'lp-footer' : Footer
   }
 };
 </script>

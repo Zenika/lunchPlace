@@ -1,11 +1,10 @@
 package com.zenika.lunchPlace.organization
 
 import com.zenika.lunchPlace.restaurant.Restaurant
-import com.zenika.lunchPlace.restaurant.category.UsedRestaurantRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.time.LocalTime
-import java.time.ZonedDateTime
 import java.util.*
 
 /**
@@ -14,7 +13,8 @@ import java.util.*
 
 @RestController
 @RequestMapping("/teams")
-class TeamController @Autowired constructor(val repository: TeamRepository, val usedRestaurantRepository: UsedRestaurantRepository) {
+class TeamController @Autowired constructor(val repository: TeamRepository,
+                                            val teamService: TeamService) {
 
     @CrossOrigin
     @RequestMapping("/", method = arrayOf(RequestMethod.GET))
@@ -26,30 +26,37 @@ class TeamController @Autowired constructor(val repository: TeamRepository, val 
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
-    fun add(@RequestParam(value = "name", defaultValue = "Les Biloutes") name: String): Team {
+    fun add(@RequestParam(value = "name", defaultValue = "Les Biloutes") name: String): ResponseEntity<Team> {
 
         //by default a team has never eaten to any restaurant
         val team = Team(name, ArrayList<User>(), ArrayList<PreferredRestaurant>(), ArrayList<UsedRestaurant>())
 
         repository.save(team)
 
-        return team
+        return ResponseEntity(team, HttpStatus.OK)
     }
 
     @CrossOrigin
     @RequestMapping("/{id}/restaurants", method = arrayOf(RequestMethod.GET))
-    fun getRestaurants(@PathVariable id: Long): MutableList<PreferredRestaurant> {
+    fun getRestaurants(@PathVariable id: Long): ResponseEntity<MutableList<PreferredRestaurant>> {
         val team: Team = repository.findById(id)
 
-        return team.preferredRestaurants
+        if (Objects.isNull(team))
+            return ResponseEntity(null, HttpStatus.NOT_FOUND)
+
+        return ResponseEntity(team.preferredRestaurants, HttpStatus.OK)
     }
+
 
     @CrossOrigin
     @RequestMapping("/{id}/history", method = arrayOf(RequestMethod.GET))
-    fun getHistory(@PathVariable id: Long): MutableList<UsedRestaurant> {
+    fun getHistory(@PathVariable id: Long): ResponseEntity<MutableList<UsedRestaurant>> {
         val team: Team = repository.findById(id)
 
-        return team.usedRestaurants
+        if (Objects.isNull(team))
+            return ResponseEntity(null, HttpStatus.NOT_FOUND)
+
+        return ResponseEntity(team.usedRestaurants, HttpStatus.OK)
     }
 
     /**
@@ -57,88 +64,18 @@ class TeamController @Autowired constructor(val repository: TeamRepository, val 
      */
     @CrossOrigin
     @RequestMapping("/{id}/dailyRestaurant", method = arrayOf(RequestMethod.GET))
-    fun getDailyRestaurant(@PathVariable id: Long): Restaurant {
+    fun getDailyRestaurant(@PathVariable id: Long): ResponseEntity<Restaurant> {
 
         val team: Team = repository.findById(id)
+        //a "non-existing" team won't eat at restaurant :)
+        if (Objects.isNull(team))
+            return ResponseEntity(null, HttpStatus.NOT_FOUND)
 
-        //this is a very basic algo I'm not proud at all about, but this is just an all first working version :
-        // - get last entry in the UsedRestaurant list and check its date.
-        //  - if this date is today, so there is already a restaurant for today.
-        //  - else random one in the list of non-already-used restaurants
+        //try to get a restaurant for today
+        val todayUsedRestaurant: UsedRestaurant = teamService.getDailyRestaurant(team)!!
+        if (Objects.isNull(todayUsedRestaurant))
+            return ResponseEntity(null, HttpStatus.NOT_FOUND)
 
-        val today: Date = this.getToday()
-        var todayRestaurant: Restaurant = Restaurant()
-        val nbRestaurants: Int = team.preferredRestaurants.size
-
-        //if there's no restaurant at all, just send back an empty array
-        if (team.preferredRestaurants.isEmpty())
-            return todayRestaurant
-
-        //if there's no used restaurant : easy, just pick a new one
-        if (team.usedRestaurants.isEmpty()) {
-            val choosenRestaurantIndex: Int = (Math.random() * nbRestaurants).toInt()
-
-            todayRestaurant = team.preferredRestaurants[choosenRestaurantIndex].restaurant
-        }
-        //else use a basic algorithm :
-        //each restaurant has a review, from 0 to n.
-        //use this review as a weight to choose one
-        else {
-            var highestScore: Int = -1
-
-            // for each preferred restaurant, try to estimate a weight based on its user review
-            for (i in team.preferredRestaurants.indices) {
-
-                var weight = team.preferredRestaurants[i].teamReview
-                //add some random to its review in order to avoid getting same order as last week
-                weight += (Math.random() * nbRestaurants).toInt()
-
-                val preferredRestaurant: Restaurant = team.preferredRestaurants[i].restaurant
-                val lastUsedIndex: Int = this.getIndexFromLastusedRestaurant(preferredRestaurant, team)
-
-                val score = lastUsedIndex * weight
-
-                if (score > highestScore) {
-                    highestScore = score
-                    todayRestaurant = preferredRestaurant
-                }
-            }
-
-        }
-
-        val newUsedRestaurant = UsedRestaurant(todayRestaurant, today)
-        usedRestaurantRepository.save(newUsedRestaurant)
-
-        //add it as the list of used restaurants for the team
-        team.usedRestaurants.add(0, newUsedRestaurant)
-        repository.save(team)
-
-        return todayRestaurant
+        return ResponseEntity(todayUsedRestaurant.restaurant, HttpStatus.OK)
     }
-
-
-    /**
-     * @return index of first occurence of the restaurant in the used restaurant for the team,
-     *         ie : index of the most recent time team lunched at it.
-     *         If no occurence is found, that menas the team has never lunched here yet. So give it a high score
-     */
-    private fun getIndexFromLastusedRestaurant(restaurant: Restaurant, team: Team): Int {
-        var index = 100000
-
-        for (i in team.usedRestaurants.indices) {
-            val r: Restaurant = team.usedRestaurants[i].restaurant
-            if (restaurant == r) {
-                index = i
-                break
-            }
-
-        }
-
-        return index
-    }
-
-    private fun getToday(): Date {
-        return Date.from(ZonedDateTime.now().with(LocalTime.MIN).toInstant())
-    }
-
 }

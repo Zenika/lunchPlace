@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne
  */
 @Entity
 data class PreferredRestaurant(@ManyToOne
-                                val restaurant: Restaurant = Restaurant(),
+                               val restaurant: Restaurant = Restaurant(),
         //global review from the team. Could be negative
                                val teamReview: Int = 0,
 

@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 data class Team(val name: String = "",
                 @ManyToMany
-                val users: List<User> = ArrayList<User>(),
+                val users: MutableList<User> =  mutableListOf<User>(),
                 @ManyToMany
                 val preferredRestaurants: MutableList<PreferredRestaurant> = mutableListOf<PreferredRestaurant>(),
                 @OneToMany

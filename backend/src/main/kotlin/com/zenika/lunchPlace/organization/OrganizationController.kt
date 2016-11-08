@@ -25,7 +25,7 @@ class OrganizationController @Autowired constructor(val repository: Organization
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
     fun add(@RequestParam(value = "name", defaultValue = "Zenika") name: String): Organization {
 
-        val organization = Organization(name, ArrayList<Team>(), ArrayList<Restaurant>())
+        val organization = Organization(name, ArrayList<Team>())
 
         repository.save(organization)
 

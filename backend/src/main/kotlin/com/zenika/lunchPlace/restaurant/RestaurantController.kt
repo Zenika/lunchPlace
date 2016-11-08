@@ -19,7 +19,7 @@ class RestaurantController @Autowired constructor(val repository: RestaurantRepo
     @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun findAll(): Iterable<Restaurant> = repository.findAll()
 
-    @RequestMapping("/{name}")
+    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
     fun findByLastName(@PathVariable name: String)
             = repository.findByName(name)
 

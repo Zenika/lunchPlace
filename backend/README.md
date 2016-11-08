@@ -15,3 +15,10 @@ gradle bootRun
 gradle docker
 
 ```
+
+## API Documentation
+
+``` bash
+[[server-origin]]/swagger-ui.html
+(ie. : http://localhost:8080/swagger-ui.html in dev)
+```

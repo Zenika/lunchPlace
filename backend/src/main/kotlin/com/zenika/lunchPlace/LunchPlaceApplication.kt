@@ -35,6 +35,7 @@ open class LunchPlaceApplication {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
+                .apiInfo(apiInfo())
     }
 
     private fun apiInfo(): ApiInfo {

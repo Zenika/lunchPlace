@@ -15,7 +15,7 @@ class FoodCategoryController @Autowired constructor(val repository: FoodCategory
     @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun findAll(): Iterable<FoodCategory> = repository.findAll()
 
-    @RequestMapping("/{name}")
+    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
     fun findByName(@PathVariable name: String)
             = repository.findByName(name)
 

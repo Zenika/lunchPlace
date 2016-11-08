@@ -20,7 +20,7 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
     @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun findAll(): Iterable<Team> = repository.findAll()
 
-    @RequestMapping("/{id}")
+    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
     fun findById(@PathVariable id: Long)
             = repository.findById(id)
 

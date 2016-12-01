@@ -51,10 +51,15 @@ dependencies {
     testCompile(group: 'junit', name: 'junit', version: '4.11')
 }
 
+group = 'zenika'
+
 task docker(type: Docker, dependsOn: build) {
-    push = false
+    push = true
     applicationName = jar.baseName
+    maintainer = 'Gwennaël Buchet <gwennael.buchet@gmail.com>'
     dockerfile = file('Dockerfile')
+    tagVersion = jar.version
+    registry = 'zenika'
     doFirst {
         copy {
             from jar

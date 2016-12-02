@@ -16,16 +16,16 @@ import java.util.*
 class RestaurantController @Autowired constructor(val repository: RestaurantRepository) {
 
     @CrossOrigin
-    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/")
     fun findAll(): Iterable<Restaurant> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}")
     fun findById(@PathVariable id: Long) : Iterable<Restaurant>
             = repository.findById(id)
 
     @CrossOrigin
-    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/add")
     fun add(@RequestParam(value = "name") name: String): Restaurant {
 
         val restaurant = Restaurant(

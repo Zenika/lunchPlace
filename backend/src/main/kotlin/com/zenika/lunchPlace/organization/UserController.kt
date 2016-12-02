@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*
 class UserController @Autowired constructor(val repository: UserRepository) {
 
     @CrossOrigin
-    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/")
     fun findAll(): Iterable<User> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}")
     fun findById(@PathVariable id: Long) : Iterable<User>
             = repository.findById(id)
 
     @CrossOrigin
-    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/add")
     fun add(@RequestParam(value = "firstname", defaultValue = "") firstname: String,
             @RequestParam(value = "lastname", defaultValue = "") lastname: String,
             @RequestParam(value = "nickname", defaultValue = "") nickname: String): User {

@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*
 class FoodCategoryController @Autowired constructor(val repository: FoodCategoryRepository) {
 
     @CrossOrigin
-    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/")
     fun findAll(): Iterable<FoodCategory> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}")
     fun findById(@PathVariable id: Long) : Iterable<FoodCategory>
             = repository.findById(id)
 
     @CrossOrigin
-    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/add")
     fun add(@RequestParam(value = "name") name: String): FoodCategory {
 
         val foodCategory = FoodCategory(name)

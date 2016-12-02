@@ -58,7 +58,7 @@ task docker(type: Docker, dependsOn: build) {
     doFirst {
         copy {
             from jar
-            into stageDir
+            into 'build/docker/build/libs/'
         }
     }
 }

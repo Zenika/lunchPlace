@@ -16,9 +16,9 @@ class UserController @Autowired constructor(val repository: UserRepository) {
     fun findAll(): Iterable<User> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
-    fun findByNickname(@PathVariable nickname: String)
-            = repository.findByNickname(nickname)
+    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    fun findById(@PathVariable id: Long) : Iterable<User>
+            = repository.findById(id)
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))

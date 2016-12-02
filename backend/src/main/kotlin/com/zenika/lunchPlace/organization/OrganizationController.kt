@@ -18,9 +18,9 @@ class OrganizationController @Autowired constructor(val repository: Organization
     fun findAll(): Iterable<Organization> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
-    fun findByName(@PathVariable name: String)
-            = repository.findByName(name)
+    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    fun findById(@PathVariable id: Long) : Iterable<Organization>
+            = repository.findById(id)
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST, RequestMethod.PUT))

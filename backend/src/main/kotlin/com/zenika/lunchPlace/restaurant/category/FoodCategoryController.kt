@@ -16,9 +16,9 @@ class FoodCategoryController @Autowired constructor(val repository: FoodCategory
     fun findAll(): Iterable<FoodCategory> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
-    fun findByName(@PathVariable name: String)
-            = repository.findByName(name)
+    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    fun findById(@PathVariable id: Long) : Iterable<FoodCategory>
+            = repository.findById(id)
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))

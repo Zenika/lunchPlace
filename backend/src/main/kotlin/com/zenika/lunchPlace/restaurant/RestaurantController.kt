@@ -20,9 +20,9 @@ class RestaurantController @Autowired constructor(val repository: RestaurantRepo
     fun findAll(): Iterable<Restaurant> = repository.findAll()
 
     @CrossOrigin
-    @RequestMapping("/{name}", method = arrayOf(RequestMethod.GET))
-    fun findByLastName(@PathVariable name: String)
-            = repository.findByName(name)
+    @RequestMapping("/{id}", method = arrayOf(RequestMethod.GET))
+    fun findById(@PathVariable id: Long) : Iterable<Restaurant>
+            = repository.findById(id)
 
     @CrossOrigin
     @RequestMapping("/add", method = arrayOf(RequestMethod.POST))

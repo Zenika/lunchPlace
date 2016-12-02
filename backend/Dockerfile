@@ -1,8 +1,9 @@
 FROM java:8
 
+MAINTAINER Zenika Lille <info-lille@zenika.com>
+
+ADD ./build/libs/lunchplace_backend-0.0.3.jar /lunchplace_backend.jar
+
 VOLUME /tmp
 
-ADD lunchplace_backend-0.0.1.jar lunchplace_backend.jar
-
-RUN sh -c 'touch /lunchplace_backend.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/lunchplace_backend.jar"]

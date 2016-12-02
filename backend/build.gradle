@@ -25,7 +25,7 @@ apply plugin: 'idea'
 
 jar {
     baseName = 'lunchplace_backend'
-    version = '0.0.1'
+    version = '0.0.3'
 }
 sourceCompatibility = 1.8
 

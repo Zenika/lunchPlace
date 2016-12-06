@@ -6,17 +6,17 @@ machine:
 
 dependencies:
   override:
-    - echo "nothing"
+    - echo "overriding dependencies with nothing"
 
 test:
   pre:
     - docker version
     - docker pull metahelicase/gradle:3.1
   override:
-    - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 build
+    - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --console plain build writeProjectVersion
   post:
-    - ls -l
-    - ls -l backend/ 
+    - export PROJECT_VERSION=$(cat backend/build/version.txt)
+    - echo "found $PROJECT_VERSION"
 
 deployment:
   hub:

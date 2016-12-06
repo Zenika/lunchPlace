@@ -2,7 +2,7 @@ FROM java:8
 
 MAINTAINER Zenika Lille <info-lille@zenika.com>
 
-ADD ./build/libs/lunchplace_backend-0.0.3.jar /lunchplace_backend.jar
+ADD ./build/libs/lunchplace_backend-*.jar /lunchplace_backend.jar
 
 VOLUME /tmp
 

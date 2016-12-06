@@ -1,0 +1,18 @@
+machine:
+  services:
+    - docker
+  java:
+    version: openjdk8
+
+dependencies:
+  override:
+    - echo "nothing"
+
+test:
+  pre:
+    - gradle --version
+    - docker version
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  override:
+    - gradle clean build:
+        pwd: backend

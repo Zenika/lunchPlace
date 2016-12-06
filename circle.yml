@@ -10,13 +10,13 @@ dependencies:
 
 test:
   pre:
-    - gradle --version
     - docker version
   override:
-    - gradle clean build:
-        pwd: backend
+    - docker run --rm -v (pwd)/backend:/project -u (id -u):(id -g) metahelicase/gradle:3.1 build
+    - ls -l
 
 deployment:
   hub:
+    branch: develop
     commands:
       - docker build -t zenika/lunchplace_backend

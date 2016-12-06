@@ -12,7 +12,11 @@ test:
   pre:
     - gradle --version
     - docker version
-    - docker login -u $DOCKER_USER -p $DOCKER_PASS
   override:
-    - gradle clean build docker:
+    - gradle clean build:
         pwd: backend
+
+deployment:
+  hub:
+    commands:
+      - docker build -t zenika/lunchplace_backend

@@ -15,11 +15,15 @@ test:
   override:
     - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --console plain build writeProjectVersion
   post:
-    - export PROJECT_VERSION=$(cat backend/build/version.txt)
-    - echo "found $PROJECT_VERSION"
+    - echo "found version $(cat backend/build/version.txt)"
+    - docker build -t zenika/lunchplace_backend:$(cat backend/build/version.txt) .:
+      pwd: backend
 
 deployment:
   hub:
     branch: develop
     commands:
-      - docker build -t zenika/lunchplace_backend
+      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
+      - docker build -t zenika/lunchplace_backend:$(cat backend/build/version.txt) .:
+        pwd: backend
+      - docker push zenika/lunchplace_backend:$(cat backend/build/version.txt)

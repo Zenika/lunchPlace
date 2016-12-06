@@ -15,7 +15,7 @@ test:
   override:
     - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain writeProjectVersion
     - echo "found version $(cat backend/build/version.txt)"
-    - docker build --rm=false -t zenika/lunchplace_backend:$(cat backend/build/version.txt) backend/
+    - docker build --rm=false -t zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) backend/
   post:
     - docker images
 

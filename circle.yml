@@ -17,7 +17,7 @@ test:
   post:
     - echo "found version $(cat backend/build/version.txt)"
     - docker build -t zenika/lunchplace_backend:$(cat backend/build/version.txt) .:
-      pwd: backend
+        pwd: backend
 
 deployment:
   hub:
@@ -25,5 +25,5 @@ deployment:
     commands:
       - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
       - docker build -t zenika/lunchplace_backend:$(cat backend/build/version.txt) .:
-        pwd: backend
+          pwd: backend
       - docker push zenika/lunchplace_backend:$(cat backend/build/version.txt)

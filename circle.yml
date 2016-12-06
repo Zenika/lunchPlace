@@ -1,4 +1,6 @@
 machine:
+  services:
+    - docker
   java:
     version: openjdk8
 
@@ -9,6 +11,8 @@ dependencies:
 test:
   pre:
     - gradle --version
+    - docker version
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
   override:
     - gradle clean build docker:
         pwd: backend

@@ -1,23 +1,27 @@
 machine:
   services:
     - docker
-  java:
-    version: openjdk8
 
 dependencies:
   override:
-    - echo "nothing"
+    - echo "overriding dependencies with nothing"
 
 test:
   pre:
-    - gradle --version
     - docker version
+    - docker pull metahelicase/gradle:3.1
   override:
-    - gradle clean build:
-        pwd: backend
+    - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain build writeProjectVersion
+    - echo "found version $(cat backend/build/version.txt)"
+    - docker build --rm=false -t zenika/lunchplace_backend:$(cat backend/build/version.txt) backend/
+  post:
+    - docker images
 
 deployment:
   hub:
     branch: develop
     commands:
-      - docker build -t zenika/lunchplace_backend
+      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
+      - docker build --rm=false -t zenika/lunchplace_backend:develop-$(cat backend/build/version.txt) backend/
+      - docker images
+      - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)

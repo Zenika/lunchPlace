@@ -5,6 +5,8 @@ machine:
 dependencies:
   override:
     - echo "overriding dependencies with nothing"
+  cache_directories:
+    - backend/.gradle
 
 test:
   pre:

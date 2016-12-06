@@ -20,10 +20,17 @@ test:
     - docker images
 
 deployment:
-  hub:
+  develop:
     branch: develop
     commands:
       - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
       - docker build --rm=false -t zenika/lunchplace_backend:develop-$(cat backend/build/version.txt) backend/
       - docker images
       - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
+  master:
+    branch: master
+    commands:
+      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
+      - docker build --rm=false -t zenika/lunchplace_backend:$(cat backend/build/version.txt) backend/
+      - docker images
+      - docker push zenika/lunchplace_backend:$(cat backend/build/version.txt)

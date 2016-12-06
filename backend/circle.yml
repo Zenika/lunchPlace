@@ -1,0 +1,13 @@
+machine:
+  java:
+    version: openjdk8
+
+dependencies:
+  override:
+    - echo "nothing"
+
+test:
+  pre:
+    - gradle --version
+  override:
+    - gradle clean build docker

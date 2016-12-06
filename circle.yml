@@ -11,4 +11,4 @@ test:
     - gradle --version
   override:
     - gradle clean build docker:
-      pwd: backend
+        pwd: backend

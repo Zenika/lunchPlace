@@ -7,6 +7,7 @@ readonly RANCHER_COMPOSE_TGZ=rancher-compose-linux-amd64-v${RANCHER_COMPOSE_VERS
 readonly RANCHER_COMPOSE_DIRECTORY=rancher-compose-v${RANCHER_COMPOSE_VERSION}
 
 if [ ! -e tools/${RANCHER_COMPOSE_TGZ} ]; then
+  mkdir -p tools
   wget -O tools/${RANCHER_COMPOSE_TGZ} ${RANCHER_COMPOSE_DOWNLOAD_URL}
   cd tools
   tar xzf ${RANCHER_COMPOSE_TGZ}

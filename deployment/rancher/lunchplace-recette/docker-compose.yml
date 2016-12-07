@@ -1,5 +1,0 @@
-backend:
-  labels:
-    io.rancher.container.pull_image: always
-  image: zenika/lunchplace_backend:develop-0.0.3
-

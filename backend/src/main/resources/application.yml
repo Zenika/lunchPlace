@@ -1,0 +1,9 @@
+#security:
+#  user:
+#    name: zenikadmin
+#    password: tropfacile
+
+management:
+  context-path: /zenikadmin
+#  security:
+#    roles: SUPERUSER

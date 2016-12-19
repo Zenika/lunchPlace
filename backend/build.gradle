@@ -5,14 +5,17 @@ buildscript {
     }
 
     repositories {
-        mavenCentral();
+        mavenCentral()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath('se.transmode.gradle:gradle-docker:1.2') //docker plugin to build image
-
+        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17"
     }
 }
 
@@ -22,12 +25,15 @@ apply plugin: 'spring-boot'
 apply plugin: 'docker'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: "com.gorylenko.gradle-git-properties"
 
 jar {
     baseName = 'lunchplace_backend'
     version = '0.0.3'
 }
 sourceCompatibility = 1.8
+
+group = 'zenika'
 
 repositories {
     mavenCentral()
@@ -40,6 +46,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-security")
 
     compile("io.springfox:springfox-swagger-ui:2.6.1")
     compile("io.springfox:springfox-swagger2:2.6.1")
@@ -52,7 +59,14 @@ dependencies {
     testCompile(group: 'junit', name: 'junit', version: '4.11')
 }
 
-group = 'zenika'
+
+gitProperties {
+    gitRepositoryRoot = new File("${project.rootDir}/..")
+}
+
+springBoot  {
+    buildInfo()
+}
 
 task docker(type: Docker, dependsOn: build) {
     push = true

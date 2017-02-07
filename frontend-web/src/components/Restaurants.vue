@@ -18,7 +18,7 @@ export default {
   },
   created: function(){
     console.log(process.env.API_URL)
-    fetch(`${process.env.API_URL}restaurants.json`).then(response => response.json()).then(data => this.items = data);
+    fetch(`${process.env.API_URL}/teams/1/restaurants/`).then(response => response.json()).then(data => this.items = data);
   },
   data() {
     return {
@@ -42,7 +42,7 @@ export default {
     width: 100%;
 
     li{
-      min-width: 20%;
+      min-width: 22%;
       width: 300px;
       max-width: 100%;
       margin-bottom: 50px;

@@ -2,7 +2,7 @@
   <div class="today">
     <h2>Le restaurant du jour</h2>
     <div class="today_restaurant">
-      <div class="cover" v-bind:style="{ backgroundImage: 'url(' + item.cover + ')' }"alt="" />
+      <div class="cover" v-bind:style="{ backgroundImage: 'url(' + item.imageURL + ')' }"alt="" />
       <div class="sep"></div>
       <div class="content">
         <span class="icon"><i class="fa fa-cutlery"></i></span>
@@ -17,7 +17,7 @@
 <script>
 export default {
   created: function(){
-    fetch(`${process.env.API_URL}day-restaurant.json`).then(response => response.json()).then(data => this.item = data);
+    fetch(`${process.env.API_URL}/teams/1/dailyRestaurant/`).then(response => response.json()).then(data => this.item = data);
   },
   data() {
     return {

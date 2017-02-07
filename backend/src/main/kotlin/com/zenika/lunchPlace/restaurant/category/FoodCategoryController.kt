@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
  */
 
 @RestController
-@RequestMapping("/foodCategories")
+@RequestMapping("/api/v1/foodCategories")
 class FoodCategoryController @Autowired constructor(val repository: FoodCategoryRepository) {
 
     @CrossOrigin

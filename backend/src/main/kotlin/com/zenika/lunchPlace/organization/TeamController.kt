@@ -17,15 +17,16 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
                                             val teamService: TeamService) {
 
     @CrossOrigin
-    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/")
     fun findAll(): Iterable<Team> = repository.findAll()
 
-    @RequestMapping("/{id}")
-    fun findById(@PathVariable id: Long)
+    @CrossOrigin
+    @GetMapping(value = "/{id}")
+    fun findById(@PathVariable id: Long) : Team
             = repository.findById(id)
 
     @CrossOrigin
-    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/add")
     fun add(@RequestParam(value = "name", defaultValue = "Les Biloutes") name: String): ResponseEntity<Team> {
 
         //by default a team has never eaten to any restaurant
@@ -37,7 +38,7 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
     }
 
     @CrossOrigin
-    @RequestMapping("/{id}/restaurants", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}/restaurants")
     fun getRestaurants(@PathVariable id: Long): ResponseEntity<MutableList<PreferredRestaurant>> {
         val team: Team = repository.findById(id)
 
@@ -49,7 +50,7 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
 
 
     @CrossOrigin
-    @RequestMapping("/{id}/history", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}/history")
     fun getHistory(@PathVariable id: Long): ResponseEntity<MutableList<UsedRestaurant>> {
         val team: Team = repository.findById(id)
 
@@ -63,7 +64,7 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
      * @return an array of propositions for a restaurant for current day
      */
     @CrossOrigin
-    @RequestMapping("/{id}/dailyRestaurant", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/{id}/dailyRestaurant")
     fun getDailyRestaurant(@PathVariable id: Long): ResponseEntity<Restaurant> {
 
         val team: Team = repository.findById(id)

@@ -14,15 +14,16 @@ import java.util.*
 class OrganizationController @Autowired constructor(val repository: OrganizationRepository) {
 
     @CrossOrigin
-    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
+    @GetMapping(value = "/")
     fun findAll(): Iterable<Organization> = repository.findAll()
 
-    @RequestMapping("/{name}")
-    fun findByName(@PathVariable name: String)
-            = repository.findByName(name)
+    @CrossOrigin
+    @GetMapping(value = "/{id}")
+    fun findById(@PathVariable id: Long) : Iterable<Organization>
+            = repository.findById(id)
 
     @CrossOrigin
-    @RequestMapping("/add", method = arrayOf(RequestMethod.POST))
+    @PostMapping(value = "/add")
     fun add(@RequestParam(value = "name", defaultValue = "Zenika") name: String): Organization {
 
         val organization = Organization(name, ArrayList<Team>())

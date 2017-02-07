@@ -1,8 +1,10 @@
-FROM java:8
+FROM java:8-jre-alpine
+
+MAINTAINER Zenika Lille <info-lille@zenika.com>
+
+ADD ./build/libs/lunchplace_backend-*.jar /lunchplace_backend.jar
+ADD ./build/version.txt /version.txt
 
 VOLUME /tmp
 
-ADD build/libs/lunchplace_backend-0.0.1.jar lunchplace_backend.jar
-
-RUN sh -c 'touch /lunchplace_backend.jar'
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/lunchplace_backend.jar"]

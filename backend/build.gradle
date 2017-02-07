@@ -25,7 +25,7 @@ apply plugin: 'idea'
 
 jar {
     baseName = 'lunchplace_backend'
-    version = '0.0.1'
+    version = '0.0.3'
 }
 sourceCompatibility = 1.8
 
@@ -39,6 +39,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    compile("io.springfox:springfox-swagger-ui:2.6.1")
+    compile("io.springfox:springfox-swagger2:2.6.1")
+
     compile("org.hsqldb:hsqldb:2.3.2")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -47,14 +51,25 @@ dependencies {
     testCompile(group: 'junit', name: 'junit', version: '4.11')
 }
 
+group = 'zenika'
+
 task docker(type: Docker, dependsOn: build) {
-    push = false
+    push = true
     applicationName = jar.baseName
+    maintainer = 'Gwennaël Buchet <gwennael.buchet@gmail.com>'
     dockerfile = file('Dockerfile')
+    tagVersion = jar.version
+    registry = 'zenika'
     doFirst {
         copy {
             from jar
-            into stageDir
+            into 'build/docker/build/libs/'
         }
     }
+}
+
+task writeProjectVersion << {
+   new File("build/version.txt").withWriter { out ->
+      out.println jar.version
+   }
 }

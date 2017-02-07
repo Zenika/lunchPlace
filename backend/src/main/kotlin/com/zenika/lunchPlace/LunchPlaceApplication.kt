@@ -77,6 +77,7 @@ open class LunchPlaceApplication {
             val foodCategoryItalien = FoodCategory("Italien")
             val foodCategoryMexicain = FoodCategory("Mexicain")
             val foodCategorySandwich = FoodCategory("Sandwich")
+            val foodCategoryTraiteur = FoodCategory("Traiteur")
 
             foodCategoryRepository.save(foodCategoryAsiatique)
             foodCategoryRepository.save(foodCategoryChinois)
@@ -96,6 +97,7 @@ open class LunchPlaceApplication {
             foodCategoryRepository.save(foodCategoryPate)
             foodCategoryRepository.save(foodCategoryMexicain)
             foodCategoryRepository.save(foodCategorySandwich)
+            foodCategoryRepository.save(foodCategoryTraiteur)
 
             val restaurantSoGood = Restaurant(
                     "So Good",
@@ -163,6 +165,13 @@ open class LunchPlaceApplication {
                     PriceCategory.LP_PRICE_STANDARD,
                     "http://vignette2.wikia.nocookie.net/logopedia/images/e/eb/Subway_new_logo.png/revision/latest?cb=20101219033821")
 
+            val restaurantGourmandine = Restaurant(
+                    "La Gourmandine Lilloise",
+                    arrayListOf(foodCategoryFrancais,foodCategoryTraiteur),
+                    PriceCategory.LP_PRICE_STANDARD,
+                    "https://s3-media4.fl.yelpcdn.com/bphoto/l3UhASNH9kbmNHiJ3G91YA/o.jpg")
+
+
             restaurantRepository.save(restaurantSoGood)
             restaurantRepository.save(restaurantTokyo)
             restaurantRepository.save(restaurantUnik)
@@ -174,6 +183,7 @@ open class LunchPlaceApplication {
             restaurantRepository.save(restaurantBigFernand)
             restaurantRepository.save(restaurantRaptorShack)
             restaurantRepository.save(restaurantSubway)
+            restaurantRepository.save(restaurantGourmandine)
 
             val preferedRestaurant1 = PreferredRestaurant(restaurantSoGood, 6)
             val preferedRestaurant2 = PreferredRestaurant(restaurantTokyo, 7)

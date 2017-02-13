@@ -10,6 +10,7 @@ dependencies:
     - bash scripts/ci/backend/dependencies--pre.sh
   override:
     - bash scripts/ci/backend/dependencies--override.sh
+    - bash scripts/ci/frontend/dependencies--override.sh
   cache_directories:
     - backend/.gradle
     - tools
@@ -17,6 +18,7 @@ dependencies:
 test:
   override:
     - bash scripts/ci/backend/test--override.sh
+    - bash scripts/ci/frontend/test--override.sh
   post:
     - bash scripts/ci/backend/test--post.sh
 

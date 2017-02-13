@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -x
 
+echo "Listing all diffs"
+git diff-tree --no-commit-id --name-only -r ${CIRCLE_SHA1}
+
 git diff-tree --no-commit-id --name-only ${CIRCLE_SHA1} | grep backend
 if [ $? == 0 ]; then
     touch build-backend.txt

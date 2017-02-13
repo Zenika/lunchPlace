@@ -8,9 +8,11 @@
 
 <script>
 
+import 'font-awesome/css/font-awesome.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from './Header';
 import Footer from './Footer';
-import 'font-awesome/css/font-awesome.css';
 
 export default {
   components: {
@@ -18,15 +20,23 @@ export default {
     'lp-footer' : Footer
   }
 };
+
 </script>
+
+<style lang="scss">
+  .row{
+    margin: 0;
+  }
+</style>
 
 <style lang="scss" scoped>
 
   .front-page{
-    background: url('/static/bg.jpg') no-repeat fixed center;
+    color: #2c2d30;
+    //background: url('/static/bg.jpg') no-repeat fixed center;
     min-height: 100%;
-    background-size: cover;
-    padding: 0 5%;
+    height: 100%;
+    //background-size: cover;
   }
 
   /*.front-page::before{

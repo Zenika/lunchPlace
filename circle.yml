@@ -24,8 +24,8 @@ deployment:
   develop:
     branch: develop
     commands:
-      - bash script/ci/backend/deployment--develop--commands.sh
+      - bash scripts/ci/backend/deployment--develop--commands.sh
   master:
     branch: master
     commands:
-      - bash script/ci/backend/deployment--master--commands.sh
+      - bash scripts/ci/backend/deployment--master--commands.sh

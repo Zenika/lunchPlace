@@ -6,11 +6,11 @@ machine:
 
 dependencies:
   pre:
-    - bash scripts/ci/common/set-build-target.sh
-    - bash scripts/ci/backend/dependencies--pre.sh
+    - scripts/ci/common/set-build-target.sh
+    - scripts/ci/backend/dependencies--pre.sh
   override:
-    - bash scripts/ci/backend/dependencies--override.sh
-    - bash scripts/ci/frontend/dependencies--override.sh
+    - scripts/ci/backend/dependencies--override.sh
+    - scripts/ci/frontend/dependencies--override.sh
   cache_directories:
     - backend/.gradle
     - tools
@@ -18,17 +18,17 @@ dependencies:
 
 test:
   override:
-    - bash scripts/ci/backend/test--override.sh
-    - bash scripts/ci/frontend/test--override.sh
+    - scripts/ci/backend/test--override.sh
+    - scripts/ci/frontend/test--override.sh
   post:
-    - bash scripts/ci/backend/test--post.sh
+    - scripts/ci/backend/test--post.sh
 
 deployment:
   develop:
     branch: develop
     commands:
-      - bash scripts/ci/backend/deployment--develop--commands.sh
+      - scripts/ci/backend/deployment--develop--commands.sh
   master:
     branch: master
     commands:
-      - bash scripts/ci/backend/deployment--master--commands.sh
+      - scripts/ci/backend/deployment--master--commands.sh

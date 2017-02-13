@@ -1,0 +1,44 @@
+[
+  {
+    "firstname": "Aurélien",
+    "lastname" : "Loyer",
+    "nickname" : "Aurel",
+    "avatar" : "https://avatars1.githubusercontent.com/u/3717296?v=3&s=460",
+    "poste" : "Consultant"
+  },
+  {
+    "firstname": "Emmanuel",
+    "lastname" : "Demey",
+    "nickname" : "ManuD",
+    "avatar" : "https://pocpic.com/assets/img/avatarman.png",
+    "poste" : "Consultant"
+  },
+  {
+    "firstname": "Antoine",
+    "lastname" : "Cordier",
+    "nickname" : "Antoine",
+    "avatar" : "https://pocpic.com/assets/img/avatarman.png",
+    "poste" : "Consultant"
+  },
+  {
+    "firstname": "Arnaud",
+    "lastname" : "Buisine",
+    "nickname" : "Arnaud",
+    "avatar" : "http://www.tourte.org/wp-content/uploads/2010/02/chat-avatar.jpg",
+    "poste" : "Boss"
+  },
+  {
+    "firstname": "Aurélien",
+    "lastname" : "Loyer",
+    "nickname" : "Aurel",
+    "avatar" : "https://pocpic.com/assets/img/avatarmatureman.png",
+    "poste" : "Consultant"
+  },
+  {
+    "firstname": "Aurélien",
+    "lastname" : "Loyer",
+    "nickname" : "Aurel",
+    "avatar" : "https://pocpic.com/assets/img/avatarman.png",
+    "poste" : "Consultant"
+  }
+]

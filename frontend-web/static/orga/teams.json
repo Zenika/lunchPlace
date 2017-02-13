@@ -1,0 +1,6 @@
+[
+    { "id":1, "name":"Consultants", "nb" : 12,"rest":8,"color": "#F44336" },
+    { "id":2, "name":"Stagiaires", "nb" : 3,"rest":19,"color": "#0EB984" },
+    { "id":3, "name":"Les RH !", "nb" : 3,"rest":3,"color": "#EEA02B" },
+    { "id":4, "name":"Groupe Compta", "nb" : 5,"rest":5,"color": "#35495E"}
+]

@@ -7,9 +7,9 @@ machine:
 dependencies:
   pre:
     - |
-          [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep backend ]] && touch build-backend.txt
+      [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep backend ]] && touch build-backend.txt
     - |
-          [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep frontend-web ]] && touch build-frontend.txt
+      [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep frontend-web ]] && touch build-frontend.txt
     - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--pre.sh
   override:
     - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--override.sh

@@ -22,9 +22,27 @@ var lock = new Auth0Lock(
 lock.on("authenticated", function(authResult) {
   lock.getUserInfo(authResult.accessToken, function(error, profile) {
     if (error) { console.log(error); return; }
+
+    //Save user and token
     localStorage.setItem('accessToken', authResult.accessToken);
     localStorage.setItem('profile', JSON.stringify(profile));
-    router.go('/home')
+
+    //Send user to api
+    let data = JSON.stringify({
+      'profile' : profile,
+      'accessToken' : authResult.accessToken
+    });
+
+    fetch(process.env.API_URL+"/user_connected",{method: "POST",body:data})
+    .then(function(res){
+      console.log(res)
+      router.go('/home')
+    })
+    .catch((error)=>{
+      console.log(error)
+      router.go('/home')
+    });
+
   });
 });
 

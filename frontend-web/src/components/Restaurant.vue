@@ -1,13 +1,13 @@
 <template>
   <div class="restaurant">
-    <div class="cover" v-bind:style="{ backgroundImage: 'url(' + item.restaurant.imageURL + ')' }"alt="">
+    <div class="cover" v-bind:style="{ backgroundImage: 'url(' + item.cover + ')' }"alt="">
       <div class="distance">200m</div>
     </div>
     <div class="sep"></div>
     <div class="content">
       <span class="icon"><i class="fa fa-cutlery"></i></span>
-      <span class="name">{{item.restaurant.name}}</span>
-      <span class="address">{{item.restaurant.address}}</span>
+      <span class="name">{{item.name}}</span>
+      <span class="address">{{item.address}}</span>
       <!--<span class="tel">{{item.tel}}</span>-->
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
     background: white;
     height: 150px;
     border-radius: 5px;
-    box-shadow: 0px 7px 20px 0px rgba(50, 50, 50, 1);
+    //box-shadow: 0px 7px 20px 0px rgba(50, 50, 50, 1);
     overflow: hidden;
 
     .cover{

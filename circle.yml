@@ -6,29 +6,26 @@ machine:
 
 dependencies:
   pre:
-    - |
-      [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep backend ]] && touch build-backend.txt
-    - |
-      [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep frontend-web ]] && touch build-frontend.txt
-    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--pre.sh
+    - bash scripts/ci/common/set-build-target.sh
+    - bash scripts/ci/backend/dependencies--pre.sh
   override:
-    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--override.sh
+    - bash scripts/ci/backend/dependencies--override.sh
   cache_directories:
     - backend/.gradle
     - tools
 
 test:
   override:
-    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/test--override.sh
+    - bash scripts/ci/backend/test--override.sh
   post:
-    - [[ test -f build-backend.txt ]] &&  bash scripts/ci/backend/test--post.sh
+    - bash scripts/ci/backend/test--post.sh
 
 deployment:
   develop:
     branch: develop
     commands:
-      - [[ test -f build-backend.txt ]] &&  bash script/ci/backend/deployment--develop--commands.sh
+      - bash script/ci/backend/deployment--develop--commands.sh
   master:
     branch: master
     commands:
-      - [[ test -f build-backend.txt ]] && bash script/ci/backend/deployment--master--commands.sh
+      - bash script/ci/backend/deployment--master--commands.sh

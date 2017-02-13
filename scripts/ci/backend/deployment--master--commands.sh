@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
 set -x
-
-echo "Not Implemented Yet"
+if [ -f build-backend.txt ]; then
+    echo "Not Implemented Yet"
+else
+    echo "Noting to do"
+fi

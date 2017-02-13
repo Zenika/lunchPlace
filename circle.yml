@@ -6,27 +6,29 @@ machine:
 
 dependencies:
   pre:
-    - BUILD_BACKEND=$(git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep backend )
-    - BUILD_FRONTEND=$(git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep frontend-web )
-    - if [ $BUILD_BACKEND ]; then bash scripts/ci/backend/dependencies--pre.sh; fi
+    - |
+          [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep backend ]] && touch build-backend.txt
+    - |
+          [[ git diff-tree --no-commit-id --name-only $CIRCLE_SHA1 | grep frontend-web ]] && touch build-frontend.txt
+    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--pre.sh
   override:
-    - if [ $BUILD_BACKEND ]; then bash scripts/ci/backend/dependencies--override.sh; fi
+    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/dependencies--override.sh
   cache_directories:
     - backend/.gradle
     - tools
 
 test:
   override:
-    - if [ $BUILD_BACKEND ]; then bash scripts/ci/backend/test--override.sh; fi
+    - [[ test -f build-backend.txt ]] && bash scripts/ci/backend/test--override.sh
   post:
-    - if [ $BUILD_BACKEND ]; then bash scripts/ci/backend/test--post.sh; fi
+    - [[ test -f build-backend.txt ]] &&  bash scripts/ci/backend/test--post.sh
 
 deployment:
   develop:
     branch: develop
     commands:
-      - if [ $BUILD_BACKEND ]; then bash script/ci/backend/deployment--develop--commands.sh; fi
+      - [[ test -f build-backend.txt ]] &&  bash script/ci/backend/deployment--develop--commands.sh
   master:
     branch: master
     commands:
-      - bash script/ci/backend/deployment--develop--commands.sh
+      - [[ test -f build-backend.txt ]] && bash script/ci/backend/deployment--master--commands.sh

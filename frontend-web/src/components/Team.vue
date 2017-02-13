@@ -22,7 +22,7 @@
 
     <div class="vote">
 
-      <div class="current row">
+      <div class="hidden current row">
         <h2>Vote en cours</h2>
         <div class="col-md-4">
           <div class="place">
@@ -43,17 +43,29 @@
           </div>
         </div>
       </div>
-      <div class="hidden">
+      <div class="">
         <h2>Voter</h2>
-        <div class="row">
-          <div class="col-md-4">
-            Vote +
+        <div class="row voteprogress">
+          <div class="col-md-4 plus">
+            <h2>+1</h2>
+            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
+            <div class="choice">
+
+            </div>
           </div>
-          <div class="col-md-4">
-            Vote =
+          <div class="col-md-4 bof">
+            <h2>=</h2>
+            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
+            <div class="choice">
+
+            </div>
           </div>
-          <div class="col-md-4">
-            Vote -
+          <div class="col-md-4 moins">
+            <h2>-1</h2>
+            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
+            <div class="choice">
+
+            </div>
           </div>
         </div>
       </div>
@@ -100,13 +112,19 @@
 
 import auth from '../auth'
 import Restaurant from './Restaurant'
+import Autocomplete from './shared/Autocomplete.vue';
 
 export default {
   components: {
+    'lp-autocomplete' : Autocomplete,
     'lp-restaurant': Restaurant
   },
   data(){
     return {
+      cities : [
+        'Bangalore','Chennai','Cochin','Delhi','Kolkata','Mumbai'
+      ],
+      value : "",
       history : null,
       users : null,
       restaurants : null
@@ -178,6 +196,30 @@ export default {
     }
 
     .vote{
+
+      .voteprogress{
+
+        h2{
+          color: white;
+          margin-top: 0px;
+          text-align: center;
+        }
+
+        .plus{
+          background: #41B883;
+        }
+
+        .bof{
+          background: #5BC0DE;
+        }
+
+        .moins{
+          background: #E35150;
+        }
+
+      }
+
+
       .current{
         margin: auto;
         max-width: 80%;

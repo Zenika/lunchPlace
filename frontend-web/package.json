@@ -2,7 +2,7 @@
   "name": "frontend-web",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Emmanuel DEMEY <demey.emmanuel@gmail.com>",
+  "author": "Emmanuel DEMEY <demey.emmanuel@gmail.com> && Aurélien Loyer <aur.loy@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -16,6 +16,7 @@
     "font-awesome": "^4.7.0",
     "material-design-lite": "^1.2.1",
     "vue": "^2.0.1",
+    "vue-resource": "^1.2.0",
     "vue-router": "^2.0.1"
   },
   "devDependencies": {

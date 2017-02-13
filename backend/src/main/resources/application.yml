@@ -1,0 +1,8 @@
+management:
+  context-path: /zenikadmin
+  security:
+    enabled: true
+
+security:
+  basic:
+    path: /zenikadmin/**

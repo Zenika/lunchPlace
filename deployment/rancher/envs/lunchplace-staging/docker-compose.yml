@@ -4,3 +4,6 @@ services:
     image: zenika/lunchplace_backend:develop-0.0.3
     labels:
       io.rancher.container.pull_image: always
+    environment:
+      SECURITY_USER_NAME: ${LP_RCT_SECURITY_USER_NAME}
+      SECURITY_USER_PASSWORD: ${LP_RCT_SECURITY_USER_PASSWORD}

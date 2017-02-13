@@ -1,0 +1,264 @@
+<template>
+  <div class="content">
+
+    <header>
+      <router-link id="all" to="/organisations">
+        <span>Organisations</span>
+      </router-link>
+      <span> > </span>
+      <router-link to="/organisation/zenika-lille/">
+        <span id="orga">Zenika Lille</span>
+      </router-link>
+      <span> > </span>
+      <span id="team">Les Stagiaires</span>
+      <div class="actions">
+        <button type="button" class="btn btn-danger">Ajouter au Favoris <i class="fa fa-star" aria-hidden="true"></button>
+      </div>
+    </header>
+
+    <div class="hidden">
+      <button type="button" class="btn btn-green">Rejoindre cette team <i class="fa fa-users" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="vote">
+
+      <div class="current row">
+        <h2>Vote en cours</h2>
+        <div class="col-md-4">
+          <div class="place">
+            2ème <i class="fa fa-trophy" aria-hidden="true" style="color:grey"></i>
+            <lp-restaurant :item="restaurants[1]"></lp-restaurant>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="place">
+            1er <i class="fa fa-trophy" aria-hidden="true" style="color:gold"></i>
+            <lp-restaurant :item="restaurants[2]"></lp-restaurant>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="place">
+            3ème <i class="fa fa-trophy" aria-hidden="true" style="color:#c74545"></i>
+            <lp-restaurant :item="restaurants[0]"></lp-restaurant>
+          </div>
+        </div>
+      </div>
+      <div class="hidden">
+        <h2>Voter</h2>
+        <div class="row">
+          <div class="col-md-4">
+            Vote +
+          </div>
+          <div class="col-md-4">
+            Vote =
+          </div>
+          <div class="col-md-4">
+            Vote -
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Les Utilisateurs</h2>
+        <ul class="list_users">
+          <li v-for="user in users" class="user_bloc">
+            <div class="avatar">
+              <img v-bind:src="user.avatar" alt="">
+            </div>
+            <h4>{{user.firstname}}<br>{{user.lastname}}</h4>
+            <em>{{user.poste}}</em>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 restaurants">
+        <h2>Les Restaurants</h2>
+        <ul>
+          <li v-for="restaurant in restaurants">
+            <lp-restaurant :item="restaurant"></lp-restaurant>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 historique">
+        <h2>Historique</h2>
+        <ul>
+          <li v-for="restaurant in restaurants">
+            <p>Le 10/10/16 :</p>
+            <lp-restaurant :item="restaurant"></lp-restaurant>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+
+import auth from '../auth'
+import Restaurant from './Restaurant'
+
+export default {
+  components: {
+    'lp-restaurant': Restaurant
+  },
+  data(){
+    return {
+      history : null,
+      users : null,
+      restaurants : null
+    };
+  },
+  created(){
+    let history_url = 'http://localhost:8090/static/restaurants.json';
+    let restaurants_url = 'http://localhost:8090/static/restaurants.json';
+    let users_url = 'http://localhost:8090/static/orga/users.json';
+
+    this.$http.get(history_url).then(response => {
+      this.history = response.body;
+    });
+
+    this.$http.get(restaurants_url).then(response => {
+      this.restaurants = response.body;
+    });
+
+    this.$http.get(users_url).then(response => {
+      this.users = response.body;
+    });
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+  .content{
+
+    header{
+      background: #f9f2f2;
+      padding: 15px;
+
+      a{
+        color: #2c2d30;
+      }
+
+      & > * {
+        display: inline-block;
+      }
+      #all{
+        font-size: 22px;
+      }
+      #orga{
+        font-size: 20px;
+      }
+      #team{
+        font-size: 18px;
+      }
+      .actions{
+        float: right;
+      }
+    }
+
+    padding: 30px;
+    padding-top: 100px;
+    color: #2c2d30;
+
+    h1{
+      text-align: center;
+    }
+
+    .fa-star{
+      color: gold;
+    }
+
+    .row > div{
+      padding: 30px;
+    }
+
+    .vote{
+      .current{
+        margin: auto;
+        max-width: 80%;
+        width: 800px;
+        text-align: center;
+        font-size: 30px;
+
+        & > div:first-of-type{
+          margin-top: 50px;
+        }
+        & > div:last-of-type{
+          margin-top: 80px;
+        }
+
+        .restaurant{
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .restaurants{
+      ul{
+        //max-height: 300px;
+        overflow-x: scroll;
+        background: #f9f2f2;
+        padding: 10px;
+        li{
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .historique{
+      ul{
+        background: #f9f2f2;
+        padding: 10px;
+        //max-height: 300px;
+        overflow-x: scroll;
+      }
+      p{
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    }
+
+    .list_users{
+
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      background: #f9f2f2;
+      //max-height: 300px;
+      overflow-x: scroll;
+
+      .user_bloc{
+
+        text-align: center;
+        margin: 10px 20px;
+
+        h4{
+          margin-bottom: 0;
+        }
+
+        .avatar{
+          border: solid 2px #2c2d30;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          display: inline-block;
+          padding: 0;
+          vertical-align: top;
+          overflow: hidden;
+
+          img{
+            width: 102%;
+          }
+        }
+
+      }
+    }
+
+  }
+</style>

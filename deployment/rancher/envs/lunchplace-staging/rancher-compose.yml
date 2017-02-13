@@ -4,4 +4,7 @@ services:
     scale: 1
     upgrade_strategy:
       start_first: true
-
+  frontend:
+    scale: 1
+    upgrade_strategy:
+      start_first: true

@@ -85,9 +85,9 @@ export default {
     };
   },
   created(){
-    let orga_url = 'http://localhost:8090/static/orga/organisation.json';
-    let teams_url = 'http://localhost:8090/static/orga/teams.json';
-    let users_url = 'http://localhost:8090/static/orga/users.json';
+    let orga_url = '/static/orga/organisation.json';
+    let teams_url = '/static/orga/teams.json';
+    let users_url = '/static/orga/users.json';
 
     this.$http.get(orga_url).then(response => {
       this.organisation = response.body;

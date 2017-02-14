@@ -1,43 +1,34 @@
 machine:
   services:
     - docker
+  node:
+    version: 6.1.0
 
 dependencies:
   pre:
-    - docker version
-    - docker pull metahelicase/gradle:3.1
-    - bash ./deployment/rancher/scripts/install-rancher-compose.sh
-    - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --version
+    - scripts/ci/common/set-build-target.sh
+    - scripts/ci/backend/dependencies--pre.sh
   override:
-    - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain build
+    - scripts/ci/backend/dependencies--override.sh
+    - scripts/ci/frontend/dependencies--override.sh
   cache_directories:
     - backend/.gradle
     - tools
+    - frontend-web/node_modules
 
 test:
   override:
-    - docker run --rm -v `pwd`/backend:/project -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain writeProjectVersion
-    - echo "found version $(cat backend/build/version.txt)"
-    - docker build --rm=false -t zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) backend/
+    - scripts/ci/backend/test--override.sh
+    - scripts/ci/frontend/test--override.sh
   post:
-    - docker images
+    - scripts/ci/backend/test--post.sh
 
 deployment:
   develop:
     branch: develop
     commands:
-      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build --rm=false -t zenika/lunchplace_backend:develop-$(cat backend/build/version.txt) backend/
-      - docker images
-      - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
-      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d backend:
-         pwd: deployment/rancher/envs/lunchplace-staging
-      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d backend:
-         pwd: deployment/rancher/envs/lunchplace-staging
+      - scripts/ci/backend/deployment--develop--commands.sh
   master:
     branch: master
     commands:
-      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
-      - docker build --rm=false -t zenika/lunchplace_backend:$(cat backend/build/version.txt) backend/
-      - docker images
-      - docker push zenika/lunchplace_backend:$(cat backend/build/version.txt)
+      - scripts/ci/backend/deployment--master--commands.sh

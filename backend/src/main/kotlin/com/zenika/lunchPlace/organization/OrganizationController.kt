@@ -10,7 +10,7 @@ import java.util.*
  */
 
 @RestController
-@RequestMapping("/organizations")
+@RequestMapping("/api/v1/organizations")
 class OrganizationController @Autowired constructor(val repository: OrganizationRepository) {
 
     @CrossOrigin

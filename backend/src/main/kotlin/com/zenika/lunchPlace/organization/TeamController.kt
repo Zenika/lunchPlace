@@ -12,7 +12,7 @@ import java.util.*
  */
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping("/api/v1/teams")
 class TeamController @Autowired constructor(val repository: TeamRepository,
                                             val teamService: TeamService) {
 

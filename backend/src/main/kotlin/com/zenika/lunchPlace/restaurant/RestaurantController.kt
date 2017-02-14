@@ -12,7 +12,7 @@ import java.util.*
  */
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("/api/v1/restaurants")
 class RestaurantController @Autowired constructor(val repository: RestaurantRepository) {
 
     @CrossOrigin

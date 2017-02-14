@@ -204,6 +204,8 @@ export default {
 
       .voteprogress{
 
+        margin: 20px 0 0px;
+
         h2{
           color: white;
           margin-top: 0px;

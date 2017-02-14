@@ -3,5 +3,4 @@ const config = {
   Auth0_CLIENT_ID : 'AsIoO5G7eebq1sLDRNYWpv5W8sPDu9qM',
   Auth0_CLIENT_DOMAIN : 'lunchplace.eu.auth0.com',
 }
-
 export default config;

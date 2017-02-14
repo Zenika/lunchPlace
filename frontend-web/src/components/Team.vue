@@ -12,7 +12,8 @@
       <span> > </span>
       <span id="team">Les Stagiaires</span>
       <div class="actions">
-        <button type="button" class="btn btn-danger">Ajouter au Favoris <i class="fa fa-star" aria-hidden="true"></button>
+        <button type="button" class="btn btn-success">Team par default <i class="fa fa-up" aria-hidden="true"></button>
+        <button type="button" class="btn btn-gold">Ajouter au Favoris <i class="fa fa-star" aria-hidden="true"></button>
       </div>
     </header>
 
@@ -22,7 +23,7 @@
 
     <div class="vote">
 
-      <div class="hidden current row">
+      <div class="hidden current row" v-if="restaurants">
         <h2>Vote en cours</h2>
         <div class="col-md-4">
           <div class="place">
@@ -50,21 +51,21 @@
             <h2>+1</h2>
             <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
             <div class="choice">
-
+              <p class="nochoice">Non choisis</p>
             </div>
           </div>
           <div class="col-md-4 bof">
             <h2>=</h2>
             <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
             <div class="choice">
-
+              <p class="nochoice">Non choisis</p>
             </div>
           </div>
           <div class="col-md-4 moins">
             <h2>-1</h2>
             <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
             <div class="choice">
-
+              <p class="nochoice">Non choisis</p>
             </div>
           </div>
         </div>
@@ -72,7 +73,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4" v-if="users">
         <h2>Les Utilisateurs</h2>
         <ul class="list_users">
           <li v-for="user in users" class="user_bloc">
@@ -85,7 +86,7 @@
         </ul>
       </div>
 
-      <div class="col-md-4 restaurants">
+      <div class="col-md-4 restaurants" v-if="restaurants">
         <h2>Les Restaurants</h2>
         <ul>
           <li v-for="restaurant in restaurants">
@@ -94,7 +95,7 @@
         </ul>
       </div>
 
-      <div class="col-md-4 historique">
+      <div class="col-md-4 historique" v-if="restaurants">
         <h2>Historique</h2>
         <ul>
           <li v-for="restaurant in restaurants">
@@ -187,8 +188,12 @@ export default {
       text-align: center;
     }
 
-    .fa-star{
-      color: gold;
+    .btn-gold{
+      color: black;
+      background: gold;
+      .fa-star{
+        color: black;
+      }
     }
 
     .row > div{
@@ -215,6 +220,18 @@ export default {
 
         .moins{
           background: #E35150;
+        }
+
+        .choice{
+
+          color: white;
+          //min-height: 50px;
+
+          .nochoice{
+            text-align: center;
+            padding-top: 30px;
+            font-size: large;
+          }
         }
 
       }

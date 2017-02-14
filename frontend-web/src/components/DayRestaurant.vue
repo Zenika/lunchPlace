@@ -15,9 +15,12 @@
 </template>
 
 <script>
+
+import config from './../../static/config/';
+
 export default {
   created: function(){
-    fetch(`${process.env.API_URL}/teams/1/dailyRestaurant/`).then(response => response.json()).then(data => this.item = data);
+    fetch(`${config.API_URL}/teams/1/dailyRestaurant/`).then(response => response.json()).then(data => this.item = data);
   },
   data() {
     return {

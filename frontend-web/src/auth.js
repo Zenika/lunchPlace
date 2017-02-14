@@ -1,5 +1,5 @@
 import router from './Router';
-
+import config from './../static/config/';
 
 var options = {
   language: 'fr',
@@ -14,8 +14,8 @@ var options = {
 };
 
 var lock = new Auth0Lock(
-  process.env.Auth0_CLIENT_ID,
-  process.env.Auth0_CLIENT_DOMAIN,
+  config.Auth0_CLIENT_ID,
+  config.Auth0_CLIENT_DOMAIN,
   options
 );
 
@@ -33,7 +33,7 @@ lock.on("authenticated", function(authResult) {
       'accessToken' : authResult.accessToken
     });
 
-    fetch(process.env.API_URL+"/user_connected",{method: "POST",body:data})
+    fetch(config.API_URL+"/user_connected",{method: "POST",body:data})
     .then(function(res){
       console.log(res)
       router.go('/home')

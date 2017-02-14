@@ -11,14 +11,15 @@
 
 <script>
 import Restaurant from './Restaurant';
+import config from './../../static/config/';
 
 export default {
   components: {
     'lp-restaurant': Restaurant
   },
   created: function(){
-    console.log(process.env.API_URL)
-    fetch(`${process.env.API_URL}/teams/1/restaurants/`).then(response => response.json()).then(data => this.items = data);
+    console.log(config.API_URL)
+    fetch(`${config.API_URL}/teams/1/restaurants/`).then(response => response.json()).then(data => this.items = data);
   },
   data() {
     return {

@@ -50,7 +50,11 @@ deployment:
 #frontend
       - docker tag zenika/lunchplace_frontend:ci-000 zenika/lunchplace_frontend:develop-x
       - docker push zenika/lunchplace_frontend:develop-x
-  master:
+      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d frontend:
+           pwd: deployment/rancher/envs/lunchplace-staging
+       - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d frontend:
+           pwd: deployment/rancher/envs/lunchplace-staging
+ # master:
     branch: master
     commands:
       - echo "wip"

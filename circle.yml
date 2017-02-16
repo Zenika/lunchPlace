@@ -40,9 +40,9 @@ test:
     - docker tag zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
     - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
     - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d backend:
-      pwd: deployment/rancher/envs/lunchplace-staging
+        pwd: deployment/rancher/envs/lunchplace-staging
     - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d backend:
-      pwd: deployment/rancher/envs/lunchplace-staging
+        pwd: deployment/rancher/envs/lunchplace-staging
 #frontend
     - docker tag zenika/lunchplace_frontend:ci-000 zenika/lunchplace_frontend:develop-x
     - docker push zenika/lunchplace_frontend:develop-x
@@ -57,9 +57,9 @@ deployment:
       - docker tag zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
       - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
       - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d backend:
-        pwd: deployment/rancher/envs/lunchplace-staging
+          pwd: deployment/rancher/envs/lunchplace-staging
       - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d backend:
-        pwd: deployment/rancher/envs/lunchplace-staging
+          pwd: deployment/rancher/envs/lunchplace-staging
 #frontend
       - docker tag zenika/lunchplace_frontend:ci-000 zenika/lunchplace_frontend:develop-x
       - docker push zenika/lunchplace_frontend:develop-x

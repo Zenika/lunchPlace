@@ -6,11 +6,18 @@ machine:
 
 dependencies:
   pre:
-    - scripts/ci/common/set-build-target.sh
-    - scripts/ci/backend/dependencies--pre.sh
+# all
+    - git diff-tree --no-commit-id --name-only -r ${CIRCLE_SHA1}
+# backend
+    - docker pull metahelicase/gradle:3.1
+    - deployment/rancher/scripts/install-rancher-compose.sh
+    - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --version
   override:
-    - scripts/ci/backend/dependencies--override.sh
-    - scripts/ci/frontend/dependencies--override.sh
+#backend
+    - docker run --rm -v `pwd`:/project --workdir /project/backend -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain build
+# frontend
+    - npm install:
+        pwd: frontend-web
   cache_directories:
     - backend/.gradle
     - tools
@@ -18,17 +25,36 @@ dependencies:
 
 test:
   override:
-    - scripts/ci/backend/test--override.sh
-    - scripts/ci/frontend/test--override.sh
-  post:
-    - scripts/ci/backend/test--post.sh
+#backend
+    - docker run --rm -v `pwd`:/project --workdir /project/backend -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain writeProjectVersion
+    - echo "found version $(cat backend/build/version.txt)"
+    - docker build --rm=false -t zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) backend/
+#frontend
+    - npm run build --env=dev:
+        pwd: frontend-web
+    - docker build --rm=false -t zenika/lunchplace_frontend:ci-000 frontend-web
 
 deployment:
   develop:
     branch: develop
     commands:
-      - scripts/ci/backend/deployment--develop--commands.sh
-  master:
+#common
+      - docker login -e infos-lille@zenika.com -u $DOCKER_USER -p $DOCKER_PASS
+#backend
+      - docker tag zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
+      - docker push zenika/lunchplace_backend:develop-$(cat backend/build/version.txt)
+      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d backend:
+          pwd: deployment/rancher/envs/lunchplace-staging
+      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d backend:
+          pwd: deployment/rancher/envs/lunchplace-staging
+#frontend
+      - docker tag zenika/lunchplace_frontend:ci-000 zenika/lunchplace_frontend:develop-x
+      - docker push zenika/lunchplace_frontend:develop-x
+      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --force-upgrade --pull -d frontend:
+           pwd: deployment/rancher/envs/lunchplace-staging
+      - ${HOME}/${CIRCLE_PROJECT_REPONAME}/tools/rancher-compose --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY --project-name lunchplace-staging up --confirm-upgrade -d frontend:
+           pwd: deployment/rancher/envs/lunchplace-staging
+ # master:
     branch: master
     commands:
-      - scripts/ci/backend/deployment--master--commands.sh
+      - echo "wip"

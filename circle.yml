@@ -15,7 +15,7 @@ dependencies:
     - npm install:
         pwd: frontend-web
   cache_directories:
-    - backend/.gradle
+    - .gradle
     - tools
     - frontend-web/node_modules
 

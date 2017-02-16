@@ -17,7 +17,7 @@ dependencies:
     - docker run --rm -v `pwd`:/project --workdir /project/backend -u `id -u`:`id -g` metahelicase/gradle:3.1 --no-daemon --console plain build
 # frontend
     - npm install:
-      pwd: frontend-web
+        pwd: frontend-web
   cache_directories:
     - backend/.gradle
     - tools
@@ -31,7 +31,7 @@ test:
     - docker build --rm=false -t zenika/lunchplace_backend:ci-$(cat backend/build/version.txt) backend/
 #frontend
     - npm run build --env=dev:
-      pwd: frontend-web
+        pwd: frontend-web
     - docker build --rm=false -t zenika/lunchplace_frontend:ci-000 frontend-web
   post:
 #common

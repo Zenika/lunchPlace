@@ -44,28 +44,44 @@
           </div>
         </div>
       </div>
-      <div class="">
+
+      <div class="" v-if="restaurants">
         <h2>Voter</h2>
         <div class="row voteprogress">
           <div class="col-md-4 plus">
             <h2>+1</h2>
-            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
-            <div class="choice">
-              <p class="nochoice">Non choisis</p>
+            <lp-autocomplete :suggestions="restaurants" :filter="'name'" v-on:choice="pour = $event"></lp-autocomplete>
+            <div class="result">
+              <p v-if="!pour" class="nochoice">Non choisis</p>
+              <p v-if="pour" class="choice">
+                <img v-bind:src="pour.cover" alt="">
+                {{pour.name}}<br>
+                {{pour.address}}
+              </p>
             </div>
           </div>
           <div class="col-md-4 bof">
             <h2>=</h2>
-            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
-            <div class="choice">
-              <p class="nochoice">Non choisis</p>
+            <lp-autocomplete :suggestions="restaurants" :filter="'name'" v-on:choice="whynot = $event"></lp-autocomplete>
+            <div class="result">
+              <p v-if="!whynot" class="nochoice">Non choisis</p>
+              <p v-if="whynot" class="choice">
+                <img v-bind:src="whynot.cover" alt="">
+                {{whynot.name}}<br>
+                {{whynot.address}}
+              </p>
             </div>
           </div>
           <div class="col-md-4 moins">
             <h2>-1</h2>
-            <lp-autocomplete :suggestions="cities" :selection.sync="value"></lp-autocomplete>
-            <div class="choice">
-              <p class="nochoice">Non choisis</p>
+            <lp-autocomplete :suggestions="restaurants" :filter="'name'" v-on:choice="contre = $event"></lp-autocomplete>
+            <div class="result">
+              <p v-if="!contre" class="nochoice">Non choisis</p>
+              <p v-if="contre" class="choice">
+                <img v-bind:src="contre.cover" alt="">
+                {{contre.name}}<br>
+                {{contre.address}}
+              </p>
             </div>
           </div>
         </div>
@@ -122,19 +138,19 @@ export default {
   },
   data(){
     return {
-      cities : [
-        'Bangalore','Chennai','Cochin','Delhi','Kolkata','Mumbai'
-      ],
-      value : "",
-      history : null,
-      users : null,
-      restaurants : null
+      value: "",
+      pour: "",
+      contre: "",
+      whynot: "",
+      history: null,
+      users: null,
+      restaurants: null
     };
   },
   created(){
-    let history_url = 'http://localhost:8090/static/restaurants.json';
-    let restaurants_url = 'http://localhost:8090/static/restaurants.json';
-    let users_url = 'http://localhost:8090/static/orga/users.json';
+    let history_url = '/static/restaurants.json';
+    let restaurants_url = '/static/restaurants.json';
+    let users_url = '/static/orga/users.json';
 
     this.$http.get(history_url).then(response => {
       this.history = response.body;
@@ -224,7 +240,7 @@ export default {
           background: #E35150;
         }
 
-        .choice{
+        .result{
 
           color: white;
           //min-height: 50px;
@@ -233,6 +249,16 @@ export default {
             text-align: center;
             padding-top: 30px;
             font-size: large;
+          }
+          .choice{
+            padding-top: 30px;
+            img{
+              width: 50%;
+              max-width: 200px;
+              float: left;
+              margin-right: 20px;
+            }
+            font-weight: bold;
           }
         }
 

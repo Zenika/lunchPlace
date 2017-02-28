@@ -230,14 +230,17 @@ export default {
 
         .plus{
           background: #41B883;
+          min-height: 320px;
         }
 
         .bof{
           background: #5BC0DE;
+          min-height: 320px;
         }
 
         .moins{
           background: #E35150;
+          min-height: 320px;
         }
 
         .result{

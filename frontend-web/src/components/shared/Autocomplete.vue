@@ -6,7 +6,8 @@ export default {
   data() {
     return {
       open: false,
-      current: 0
+      current: 0,
+      selection: ""
     }
   },
 
@@ -15,19 +16,18 @@ export default {
       type: Array,
       required: true
     },
-
-    selection: {
+    filter: {
       type: String,
-      required: true,
-      twoWay: true
+      required: true
     }
   },
 
   computed: {
     matches() {
-      return this.suggestions.filter((str) => {
-        return str.indexOf(this.selection) >= 0;
-      });
+      if(this.selection)
+        return this.suggestions.filter((restaurant) => {
+          return restaurant[this.filter].toLowerCase().indexOf(this.selection.toLowerCase()) >= 0;
+        });
     },
 
     openSuggestion() {
@@ -39,7 +39,8 @@ export default {
 
   methods: {
     enter() {
-      this.selection = this.matches[this.current];
+      this.selection = this.matches[this.current][this.filter];
+      this.$emit('choice', this.matches[this.current]);
       this.open = false;
     },
 
@@ -65,7 +66,9 @@ export default {
     },
 
     suggestionClick(index) {
-      this.selection = this.matches[index];
+      console.log(index);
+      this.selection = this.matches[index][this.filter];
+      this.$emit('choice', this.matches[index]);
       this.open = false;
     },
   }
@@ -82,8 +85,8 @@ export default {
     @input = 'change'
     />
     <ul class="dropdown-menu" style="width:100%">
-      <li v-for="suggestion in matches" v-bind:class="{'active': isActive($index)}" @click="suggestionClick($index)">
-        <a href="#">{{ suggestion }}</a>
+      <li v-for="(suggestion,index) in matches" v-bind:class="{'active': isActive(index)}" @click="suggestionClick(index)">
+        <a href="#">{{ suggestion.name }}</a>
       </li>
     </ul>
   </div>

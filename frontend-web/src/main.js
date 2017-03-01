@@ -18,7 +18,7 @@ Vue.http.interceptors.push((request, next)  => {
   next((response) => {
     if(response.status == 401 ) {
       auth.logout();
-      Router.go('/');
+      Router.push('/');
     }
   });
 

@@ -34,7 +34,7 @@
       auth.lock.show((err, profile, id_token) => {
         localStorage.setItem('profile', JSON.stringify(profile))
         localStorage.setItem('id_token', id_token)
-        this.$router.go('home')
+        this.$router.push('home')
       });
     }
   };

@@ -1,7 +1,6 @@
 package com.zenika.lunchPlace.organization
 
 import com.zenika.lunchPlace.restaurant.Restaurant
-import com.zenika.lunchPlace.restaurant.category.UsedRestaurantRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.LocalTime

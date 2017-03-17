@@ -1,0 +1,1 @@
+spring.data.mongodb.uri="mongodb://<dbuser>:<dbpassword>@ds141368.mlab.com:41368/lunchplace"

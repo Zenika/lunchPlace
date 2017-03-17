@@ -48,10 +48,11 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
 
+    compile("org.mongodb:mongo-java-driver:3.2.1")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+
     compile("io.springfox:springfox-swagger-ui:2.6.1")
     compile("io.springfox:springfox-swagger2:2.6.1")
-
-    compile("org.hsqldb:hsqldb:2.3.2")
 
     compile("com.fasterxml.jackson.module:jackson-module-kotlin")
 

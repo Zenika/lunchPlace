@@ -1,6 +1,5 @@
 package com.zenika.lunchPlace.restaurant
 
-import com.zenika.lunchPlace.organization.RestaurantRepository
 import com.zenika.lunchPlace.restaurant.category.FoodCategory
 import com.zenika.lunchPlace.restaurant.category.PriceCategory
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +20,7 @@ class RestaurantController @Autowired constructor(val repository: RestaurantRepo
 
     @CrossOrigin
     @GetMapping(value = "/{id}")
-    fun findById(@PathVariable id: Long) : Iterable<Restaurant>
+    fun findById(@PathVariable id: Long): Iterable<Restaurant>
             = repository.findById(id)
 
     @CrossOrigin

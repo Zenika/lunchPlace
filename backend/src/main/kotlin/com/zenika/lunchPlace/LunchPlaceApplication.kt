@@ -1,9 +1,6 @@
 package com.zenika.lunchPlace
 
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.zenika.lunchPlace.organization.*
-import com.zenika.lunchPlace.restaurant.Restaurant
-import com.zenika.lunchPlace.restaurant.category.*
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
@@ -49,17 +46,17 @@ open class LunchPlaceApplication {
     }
 
     @Bean
-    open fun init(restaurantRepository: RestaurantRepository,
+    open fun init(/*restaurantRepository: RestaurantRepository,
                   foodCategoryRepository: FoodCategoryRepository,
                   teamRepository: TeamRepository,
                   userRepository: UserRepository,
                   preferredRestaurantRepository: PreferredRestaurantRepository,
                   organizationRepository: OrganizationRepository,
-                  usedRestaurantRepository: UsedRestaurantRepository
+                  usedRestaurantRepository: UsedRestaurantRepository*/
     ): CommandLineRunner {
         return CommandLineRunner {
 
-            val foodCategoryAsiatique = FoodCategory("Asiatique")
+            /*val foodCategoryAsiatique = FoodCategory("Asiatique")
             val foodCategoryChinois = FoodCategory("Chinois")
             val foodCategoryJaponais = FoodCategory("Japonais")
             val foodCategoryThai = FoodCategory("Thaï")
@@ -231,6 +228,7 @@ open class LunchPlaceApplication {
 
             val organizationZenika = Organization("Zenika", mutableListOf(teamBiloute))
             organizationRepository.save(organizationZenika)
+            */
 
         }
     }

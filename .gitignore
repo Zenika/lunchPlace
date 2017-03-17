@@ -15,3 +15,4 @@ backend/*.iml
 frontent_web/*.iml
 
 
+/backend/src/main/resources/application.properties

@@ -22,7 +22,7 @@ class TeamController @Autowired constructor(val repository: TeamRepository,
 
     @CrossOrigin
     @GetMapping(value = "/{id}")
-    fun findById(@PathVariable id: Long) : Team
+    fun findById(@PathVariable id: Long): Team
             = repository.findById(id)
 
     @CrossOrigin

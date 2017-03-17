@@ -1,7 +1,7 @@
 buildscript {
     ext {
         springBootVersion = '1.4.1.RELEASE'
-        kotlinVersion = '1.0.6'
+        kotlinVersion = '1.1.1'
     }
 
     repositories {
@@ -44,7 +44,6 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter')
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-security")
 

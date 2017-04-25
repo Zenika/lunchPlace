@@ -17,3 +17,4 @@ frontent_web/*.iml
 deployment/rancher/envs/lunchplace-dev/
 
 
+/backend/src/main/resources/application.properties

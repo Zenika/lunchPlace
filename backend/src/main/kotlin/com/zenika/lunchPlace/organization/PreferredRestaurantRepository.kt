@@ -1,7 +1,5 @@
-package com.zenika.lunchPlace.restaurant.category
+package com.zenika.lunchPlace.organization
 
-import com.zenika.lunchPlace.organization.Organization
-import com.zenika.lunchPlace.organization.PreferredRestaurant
 import org.springframework.data.repository.CrudRepository
 
 /**

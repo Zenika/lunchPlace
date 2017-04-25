@@ -36,11 +36,11 @@ lock.on("authenticated", function(authResult) {
     fetch(config.API_URL+"/user_connected",{method: "POST",body:data})
     .then(function(res){
       console.log(res)
-      router.go('/home')
+      router.push('/home')
     })
     .catch((error)=>{
       console.log(error)
-      router.go('/home')
+      router.push('/home')
     });
 
   });
@@ -57,7 +57,7 @@ const auth = {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('profile')
     this.authenticated = false
-    router.go('/home')
+    router.push('/home')
   },
 
   checkAuth() {

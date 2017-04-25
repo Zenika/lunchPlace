@@ -1,6 +1,5 @@
 package com.zenika.lunchPlace.organization
 
-import com.zenika.lunchPlace.restaurant.Restaurant
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -19,7 +18,7 @@ class OrganizationController @Autowired constructor(val repository: Organization
 
     @CrossOrigin
     @GetMapping(value = "/{id}")
-    fun findById(@PathVariable id: Long) : Iterable<Organization>
+    fun findById(@PathVariable id: Long): Iterable<Organization>
             = repository.findById(id)
 
     @CrossOrigin

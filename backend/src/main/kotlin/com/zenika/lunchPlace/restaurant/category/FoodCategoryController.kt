@@ -17,7 +17,7 @@ class FoodCategoryController @Autowired constructor(val repository: FoodCategory
 
     @CrossOrigin
     @GetMapping(value = "/{id}")
-    fun findById(@PathVariable id: Long) : Iterable<FoodCategory>
+    fun findById(@PathVariable id: Long): Iterable<FoodCategory>
             = repository.findById(id)
 
     @CrossOrigin
